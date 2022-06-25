@@ -160,8 +160,9 @@ class _SettingsState extends State<Settings> {
                                     color: const Color(0xff323062)),
                               );
                             }),
-                            Consumer<Models>(builder: (context, model, child) {
-                              return Slider(
+                            Consumer<Models>(
+                              builder: (context, model, child) {
+                                return Slider(
                                   min: 0,
                                   max: 100,
                                   activeColor: Colors.lightBlue,
@@ -175,8 +176,10 @@ class _SettingsState extends State<Settings> {
                                         .waterflow();
                                     Provider.of<Models>(context, listen: false)
                                         .uploadIntData("age", value.floor());
-                                  });
-                            })
+                                  },
+                                );
+                              },
+                            )
                           ],
                         ),
                       ),

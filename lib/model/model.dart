@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-import 'package:water_drinker/model/drinkdata.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_drinker/model/hive_model.dart';
@@ -16,13 +15,9 @@ class Models extends ChangeNotifier {
   int _progress = 0;
   int _weekly = 0;
   int _weeklyDate = -1;
+  bool _newUser = true;
   final List<String> _finalHistoryData = [];
   Color _targetHit = Colors.black;
-  int _drinkdataid = 0;
-  String _getData = "";
-  DrinkData senduserdata = DrinkData();
-  DrinkData getuserdata = DrinkData();
-  List<String> _idKeys = [];
 
   Map<String, String> dailyHistory = {};
 
@@ -31,19 +26,18 @@ class Models extends ChangeNotifier {
   int get dailyGoal => _dailyGoal;
   int get radioValue => _radioValue;
   int get waterPercentage => _waterPercentage;
-  int get drinkdataid => _drinkdataid;
   double get dropHeight => _dropHeight;
   int get progress => _progress;
   int get weekly => _weekly;
+  bool get newUser => _newUser;
   int get weeklyDate => _weeklyDate;
   List get finalHistoryData => _finalHistoryData;
-  String get getData => _getData;
-  List get idKeys => _idKeys;
 
   Color get targetHit => _targetHit;
 
   void loadData() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
+    _newUser = pref.getBool('newUser') ?? true;
     _suggested = pref.getInt('suggested') ?? 0;
     _age = pref.getInt('age') ?? 0;
     _dailyGoal = pref.getInt('dailyGoal') ?? 100;
@@ -53,13 +47,9 @@ class Models extends ChangeNotifier {
     _progress = pref.getInt('progress') ?? 0;
     _weekly = pref.getInt('weekly') ?? 0;
     _weeklyDate = pref.getInt('weeklyDate') ?? DateTime.now().weekday;
-    _drinkdataid = pref.getInt('drinkId') ?? 0;
-    _getData = pref.getString('$_drinkdataid') ?? "";
-    _idKeys = pref.getStringList('lists') ?? [];
     int timestamp = pref.getInt('today') ?? 0;
     DateTime now = DateTime.now();
 
-    // print(pref.getKeys());
     //sharedPreferences weekly reset
     if (now.weekday == 7 && _weeklyDate != 7) {
       pref.setInt('weeklyDate', 7);
@@ -75,9 +65,8 @@ class Models extends ChangeNotifier {
       _progress = 0;
       pref.setInt('waterPercentage', 0);
       _waterPercentage = 0;
-      pref.setInt('drinkId', 0);
-      _drinkdataid = 0;
       timestamp = DateTime.now().day;
+
       //clear database every 24 hours
       hiveBox.clear;
       pref.setInt('today', timestamp);
@@ -101,11 +90,6 @@ class Models extends ChangeNotifier {
     pref.setString(keys, value);
   }
 
-  uploadListData(List<String> lists) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setStringList('list', lists);
-  }
-
   ageSlider(int ageSlider) {
     _age = ageSlider;
     notifyListeners();
@@ -119,6 +103,11 @@ class Models extends ChangeNotifier {
   radioButton(int value) {
     _radioValue = value;
     notifyListeners();
+  }
+
+  showOnboardingScreen() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setBool('newUser', false);
   }
 
   waterPercent(int quantity) {
@@ -148,19 +137,11 @@ class Models extends ChangeNotifier {
     }
     String time = hourDate + ':' + minuteDate;
 
-    senduserdata.date = date;
-    senduserdata.time = time;
-    senduserdata.quantity = quantity.toString();
     uploadIntData('weekly', _weekly);
     HiveModel hive = HiveModel(date: date, time: time, quantity: quantity);
     hiveBox.add(hive);
-    //uploadStringData('$_drinkdataid', jsonEncode(senduserdata));
-    _idKeys.add('$_drinkdataid');
-    uploadListData(_idKeys);
     uploadIntData("progress", _progress);
     uploadIntData("waterPercentage", _waterPercentage);
-    _drinkdataid++;
-    uploadIntData('drinkId', _drinkdataid);
     notifyListeners();
   }
 
