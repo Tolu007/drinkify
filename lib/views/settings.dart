@@ -74,7 +74,7 @@ class _SettingsState extends State<Settings> {
                                       builder: (context, model, child) {
                                     return Radio(
                                         value: 0,
-                                        groupValue: model.radioValue,
+                                        groupValue: model.gender,
                                         activeColor: Colors.lightBlue,
                                         onChanged: (int? value) {
                                           Provider.of<Models>(context,
@@ -88,7 +88,7 @@ class _SettingsState extends State<Settings> {
                                               .waterflow();
                                           Provider.of<Models>(context,
                                                   listen: false)
-                                              .uploadIntData("radioValue", 0);
+                                              .uploadIntData("gender", 0);
                                         });
                                   }),
                                 ),
@@ -107,7 +107,7 @@ class _SettingsState extends State<Settings> {
                                       builder: (context, model, child) {
                                     return Radio(
                                         value: 1,
-                                        groupValue: model.radioValue,
+                                        groupValue: model.gender,
                                         activeColor: Colors.lightBlue,
                                         onChanged: (int? value) {
                                           Provider.of<Models>(context,
@@ -121,7 +121,7 @@ class _SettingsState extends State<Settings> {
                                               .waterflow();
                                           Provider.of<Models>(context,
                                                   listen: false)
-                                              .uploadIntData("radioValue", 1);
+                                              .uploadIntData("gender", 1);
                                         });
                                   }),
                                 ),

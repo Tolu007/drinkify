@@ -9,29 +9,25 @@ class Models extends ChangeNotifier {
   int _suggested = 0;
   int _age = 0;
   int _dailyGoal = 100;
-  int _radioValue = -1;
+  int _gender = -1;
   int _waterPercentage = 0;
   double _dropHeight = 0;
   int _progress = 0;
   int _weekly = 0;
   int _weeklyDate = -1;
   bool _newUser = true;
-  final List<String> _finalHistoryData = [];
   Color _targetHit = Colors.black;
-
-  Map<String, String> dailyHistory = {};
 
   int get suggested => _suggested;
   int get age => _age;
   int get dailyGoal => _dailyGoal;
-  int get radioValue => _radioValue;
+  int get gender => _gender;
   int get waterPercentage => _waterPercentage;
   double get dropHeight => _dropHeight;
   int get progress => _progress;
   int get weekly => _weekly;
   bool get newUser => _newUser;
   int get weeklyDate => _weeklyDate;
-  List get finalHistoryData => _finalHistoryData;
 
   Color get targetHit => _targetHit;
 
@@ -41,7 +37,7 @@ class Models extends ChangeNotifier {
     _suggested = pref.getInt('suggested') ?? 0;
     _age = pref.getInt('age') ?? 0;
     _dailyGoal = pref.getInt('dailyGoal') ?? 100;
-    _radioValue = pref.getInt('radioValue') ?? -1;
+    _gender = pref.getInt('gender') ?? -1;
     _waterPercentage = pref.getInt('waterPercentage') ?? 0;
     _dropHeight = pref.getDouble('dropHeight') ?? 0;
     _progress = pref.getInt('progress') ?? 0;
@@ -101,7 +97,7 @@ class Models extends ChangeNotifier {
   }
 
   radioButton(int value) {
-    _radioValue = value;
+    _gender = value;
     notifyListeners();
   }
 
@@ -162,9 +158,9 @@ class Models extends ChangeNotifier {
       _suggested = 190;
     } else if (_age > 13 && _age < 19) {
       _suggested = 260;
-    } else if (_age > 18 && _radioValue == 0) {
+    } else if (_age > 18 && _gender == 0) {
       _suggested = 390;
-    } else if (_age > 18 && _radioValue == 1) {
+    } else if (_age > 18 && _gender == 1) {
       _suggested = 280;
     }
     uploadIntData("suggested", _suggested);

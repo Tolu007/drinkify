@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:water_drinker/model/model.dart';
-import 'package:water_drinker/views/age_intro.dart';
+import 'package:water_drinker/views/onboarding/age_intro.dart';
 
 class GenderSelect extends StatefulWidget {
   const GenderSelect({Key? key}) : super(key: key);
@@ -13,107 +13,144 @@ class GenderSelect extends StatefulWidget {
 
 class _GenderSelectState extends State<GenderSelect> {
   int _selectedGender = -1;
-  double _imageMaleHeight = 50;
-  double _imageMaleWidth = 50;
-  double _imageFemaleHeight = 50;
-  double _imageFemaleWidth = 50;
+  double _imageMaleHeight = 70;
+  double _imageMaleWidth = 70;
+  double _imageFemaleHeight = 70;
+  double _imageFemaleWidth = 70;
+
+  Color _mcolor = Colors.grey;
+  Color _fcolor = Colors.grey;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          "Your Gender",
-          style: GoogleFonts.poppins(
-            color: Colors.black,
-            fontSize: 20,
-          ),
-        ),
-        Center(
-          child: Row(
-            children: [
-              Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      _selectedGender = 0;
-                      setState(() {
-                        _imageMaleHeight = 70;
-                        _imageMaleWidth = 70;
-                      });
-                    },
-                    child: Image.asset(
-                      "name",
-                      width: _imageMaleWidth,
-                      height: _imageMaleHeight,
-                    ),
-                  ),
-                  Text("Male",
-                      style: GoogleFonts.poppins(
-                        color: Colors.lightBlue,
-                        fontSize: 18,
-                      ))
-                ],
-              ),
-              Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      _selectedGender = 1;
-                      setState(() {
-                        _imageMaleHeight = 70;
-                        _imageMaleWidth = 70;
-                      });
-                    },
-                    child: Image.asset("name"),
-                  ),
-                  Text(
-                    "Female",
-                    style: GoogleFonts.poppins(
-                      color: Colors.lightBlue,
-                      fontSize: 18,
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
-        const Expanded(
-          child: SizedBox(
-            height: 10,
-          ),
-        ),
-        Row(
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Expanded(
               child: SizedBox(
-                width: 10,
+                height: 10,
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                if (_selectedGender > -1) {
-                  Provider.of<Models>(context, listen: false)
-                      .uploadIntData('age', _selectedGender);
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const AgeSelect(),
-                    ),
-                  );
-                }
-              },
-              child: Text(
-                "Next",
-                style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontSize: 18,
+            Text(
+              "Your Gender",
+              style: GoogleFonts.poppins(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),
+            ),
+            const Expanded(
+              child: SizedBox(
+                height: 10,
+              ),
+            ),
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          _selectedGender = 0;
+                          setState(() {
+                            _imageMaleHeight = 200;
+                            _imageMaleWidth = 200;
+                            _mcolor = Colors.lightBlue;
+                            _fcolor = Colors.grey;
+                            _imageFemaleHeight = 70;
+                            _imageFemaleWidth = 70;
+                          });
+                        },
+                        child: Image.asset(
+                          "assets/man.png",
+                          width: _imageMaleHeight,
+                          height: _imageMaleWidth,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                      Text(
+                        "Male",
+                        style: GoogleFonts.poppins(
+                          color: _mcolor,
+                          fontSize: 18,
+                        ),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          _selectedGender = 1;
+                          setState(() {
+                            _imageFemaleHeight = 200;
+                            _imageFemaleWidth = 200;
+                            _mcolor = Colors.grey;
+                            _fcolor = Colors.lightBlue;
+                            _imageMaleHeight = 70;
+                            _imageMaleWidth = 70;
+                          });
+                        },
+                        child: Image.asset(
+                          "assets/woman.png",
+                          width: _imageFemaleWidth,
+                          height: _imageFemaleHeight,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                      Text(
+                        "Female",
+                        style: GoogleFonts.poppins(
+                          color: _fcolor,
+                          fontSize: 18,
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const Expanded(
+              child: SizedBox(
+                height: 10,
+              ),
+            ),
+            SizedBox(
+              width: 240,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_selectedGender > -1) {
+                    Provider.of<Models>(context, listen: false)
+                        .uploadIntData('gender', _selectedGender);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const AgeSelect(),
+                      ),
+                    );
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                child: Text(
+                  "Next",
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 25,
+                  ),
                 ),
               ),
             )
           ],
-        )
-      ],
+        ),
+      ),
     );
   }
 }
