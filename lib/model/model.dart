@@ -67,7 +67,6 @@ class Models extends ChangeNotifier {
       hiveBox.clear;
       pref.setInt('today', timestamp);
     }
-
     notifyListeners();
   }
 

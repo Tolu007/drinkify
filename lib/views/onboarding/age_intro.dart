@@ -46,14 +46,27 @@ class _AgeSelectState extends State<AgeSelect> {
                 children: [
                   Image.asset(
                     "assets/age.png",
-                    width: 140,
-                    height: 140,
+                    width: 200,
+                    height: 200,
                     fit: BoxFit.contain,
                   ),
                   NumberPicker(
                     minValue: 10,
                     maxValue: 100,
                     value: _currentAge,
+                    textStyle: GoogleFonts.poppins(
+                      fontSize: 16,
+                    ),
+                    selectedTextStyle: GoogleFonts.poppins(
+                      fontSize: 30,
+                      color: Colors.blue,
+                    ),
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        top: BorderSide(width: 1.0, color: Colors.grey),
+                        bottom: BorderSide(width: 1.0, color: Colors.grey),
+                      ),
+                    ),
                     onChanged: (value) => setState(() {
                       _currentAge = value;
                     }),
@@ -73,6 +86,8 @@ class _AgeSelectState extends State<AgeSelect> {
                 onPressed: () {
                   Provider.of<Models>(context, listen: false)
                       .uploadIntData('age', _currentAge);
+                  Provider.of<Models>(context, listen: false)
+                      .showOnboardingScreen();
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => const home(),
