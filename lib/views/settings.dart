@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:water_drinker/model/model.dart';
 import 'package:timezone/data/latest.dart' as tz;
-import 'package:water_drinker/model/notification_service.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -67,10 +66,7 @@ class _SettingsState extends State<Settings> {
                                 fontWeight: FontWeight.bold),
                           ),
                           GestureDetector(
-                            onTap: () {
-                              NotificationService().showNotification(1,
-                                  "My Notification", "Go and drink water", 2);
-                            },
+                            onTap: () {},
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
