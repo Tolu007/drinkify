@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:water_drinker/model/model.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:water_drinker/model/notification_service.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -11,6 +13,12 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  @override
+  void initState() {
+    super.initState();
+    tz.initializeTimeZones();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,73 +66,79 @@ class _SettingsState extends State<Settings> {
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 30,
-                                child: Consumer<Models>(
-                                    builder: (context, model, child) {
-                                  return Radio(
-                                      value: 0,
-                                      groupValue: model.gender,
-                                      activeColor: Colors.lightBlue,
-                                      onChanged: (int? value) {
-                                        Provider.of<Models>(context,
-                                                listen: false)
-                                            .radioButton(value!);
-                                        Provider.of<Models>(context,
-                                                listen: false)
-                                            .suggestBody();
-                                        Provider.of<Models>(context,
-                                                listen: false)
-                                            .waterflow();
-                                        Provider.of<Models>(context,
-                                                listen: false)
-                                            .uploadIntData("gender", 0);
-                                      });
-                                }),
-                              ),
-                              Text(
-                                "Male",
-                                style: GoogleFonts.roboto(
-                                    fontSize: 14,
-                                    color: const Color(0xff323062)),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              SizedBox(
-                                width: 30,
-                                child: Consumer<Models>(
-                                    builder: (context, model, child) {
-                                  return Radio(
-                                      value: 1,
-                                      groupValue: model.gender,
-                                      activeColor: Colors.lightBlue,
-                                      onChanged: (int? value) {
-                                        Provider.of<Models>(context,
-                                                listen: false)
-                                            .radioButton(value!);
-                                        Provider.of<Models>(context,
-                                                listen: false)
-                                            .suggestBody();
-                                        Provider.of<Models>(context,
-                                                listen: false)
-                                            .waterflow();
-                                        Provider.of<Models>(context,
-                                                listen: false)
-                                            .uploadIntData("gender", 1);
-                                      });
-                                }),
-                              ),
-                              Text(
-                                "Female",
-                                style: GoogleFonts.roboto(
-                                    fontSize: 14,
-                                    color: const Color(0xff323062)),
-                              ),
-                            ],
+                          GestureDetector(
+                            onTap: () {
+                              NotificationService().showNotification(1,
+                                  "My Notification", "Go and drink water", 2);
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: 30,
+                                  child: Consumer<Models>(
+                                      builder: (context, model, child) {
+                                    return Radio(
+                                        value: 0,
+                                        groupValue: model.gender,
+                                        activeColor: Colors.lightBlue,
+                                        onChanged: (int? value) {
+                                          Provider.of<Models>(context,
+                                                  listen: false)
+                                              .radioButton(value!);
+                                          Provider.of<Models>(context,
+                                                  listen: false)
+                                              .suggestBody();
+                                          Provider.of<Models>(context,
+                                                  listen: false)
+                                              .waterflow();
+                                          Provider.of<Models>(context,
+                                                  listen: false)
+                                              .uploadIntData("gender", 0);
+                                        });
+                                  }),
+                                ),
+                                Text(
+                                  "Male",
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 14,
+                                      color: const Color(0xff323062)),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                SizedBox(
+                                  width: 30,
+                                  child: Consumer<Models>(
+                                      builder: (context, model, child) {
+                                    return Radio(
+                                        value: 1,
+                                        groupValue: model.gender,
+                                        activeColor: Colors.lightBlue,
+                                        onChanged: (int? value) {
+                                          Provider.of<Models>(context,
+                                                  listen: false)
+                                              .radioButton(value!);
+                                          Provider.of<Models>(context,
+                                                  listen: false)
+                                              .suggestBody();
+                                          Provider.of<Models>(context,
+                                                  listen: false)
+                                              .waterflow();
+                                          Provider.of<Models>(context,
+                                                  listen: false)
+                                              .uploadIntData("gender", 1);
+                                        });
+                                  }),
+                                ),
+                                Text(
+                                  "Female",
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 14,
+                                      color: const Color(0xff323062)),
+                                ),
+                              ],
+                            ),
                           )
                         ],
                       ),

@@ -7,11 +7,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'model/hive_model.dart';
+import 'model/notification_service.dart';
 
 const String hiveBoxName = "History";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  NotificationService().initNotification();
   final applicationDocumentDir = await getApplicationDocumentsDirectory();
   await Hive.initFlutter(applicationDocumentDir.toString());
   Hive.registerAdapter(HiveModelAdapter());
