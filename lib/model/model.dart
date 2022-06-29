@@ -2,8 +2,10 @@ import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_drinker/model/hive_model.dart';
+import 'package:water_drinker/views/onboarding/gender.dart';
 
 class Models extends ChangeNotifier {
+  final GenderSelect _selectedGender = const GenderSelect();
   final String hiveBoxName = "History";
   Box<HiveModel> hiveBox = Hive.box<HiveModel>("History");
   int _suggested = 0;
@@ -150,18 +152,21 @@ class Models extends ChangeNotifier {
     notifyListeners();
   }
 
-  suggestBody() {
-    if (_age < 9) {
+  suggestTargetBody(int age) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    _gender = pref.getInt('gender')!;
+    if (age < 9) {
       _suggested = 120;
-    } else if (_age > 8 && _age < 14) {
+    } else if (age > 8 && age < 14) {
       _suggested = 190;
-    } else if (_age > 13 && _age < 19) {
+    } else if (age > 13 && age < 19) {
       _suggested = 260;
-    } else if (_age > 18 && _gender == 0) {
+    } else if (age > 18 && _gender == 0) {
       _suggested = 390;
-    } else if (_age > 18 && _gender == 1) {
+    } else if (age > 18 && _gender == 1) {
       _suggested = 280;
     }
+    uploadIntData("dailyGoal", _suggested);
     uploadIntData("suggested", _suggested);
     notifyListeners();
   }

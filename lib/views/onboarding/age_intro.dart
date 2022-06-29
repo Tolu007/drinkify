@@ -88,6 +88,8 @@ class _AgeSelectState extends State<AgeSelect> {
                       .uploadIntData('age', _currentAge);
                   Provider.of<Models>(context, listen: false)
                       .showOnboardingScreen();
+                  Provider.of<Models>(context, listen: false)
+                      .suggestTargetBody(_currentAge);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => const home(),

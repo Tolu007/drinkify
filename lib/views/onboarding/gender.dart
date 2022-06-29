@@ -12,7 +12,7 @@ class GenderSelect extends StatefulWidget {
 }
 
 class _GenderSelectState extends State<GenderSelect> {
-  int _selectedGender = -1;
+  int selectedGender = -1;
   double _imageMaleHeight = 70;
   double _imageMaleWidth = 70;
   double _imageFemaleHeight = 70;
@@ -55,7 +55,7 @@ class _GenderSelectState extends State<GenderSelect> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          _selectedGender = 0;
+                          selectedGender = 0;
                           setState(() {
                             _imageMaleHeight = 200;
                             _imageMaleWidth = 200;
@@ -85,7 +85,7 @@ class _GenderSelectState extends State<GenderSelect> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          _selectedGender = 1;
+                          selectedGender = 1;
                           setState(() {
                             _imageFemaleHeight = 200;
                             _imageFemaleWidth = 200;
@@ -124,9 +124,9 @@ class _GenderSelectState extends State<GenderSelect> {
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  if (_selectedGender > -1) {
+                  if (selectedGender > -1) {
                     Provider.of<Models>(context, listen: false)
-                        .uploadIntData('gender', _selectedGender);
+                        .uploadIntData('gender', selectedGender);
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => const AgeSelect(),

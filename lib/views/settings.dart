@@ -82,9 +82,7 @@ class _SettingsState extends State<Settings> {
                                           Provider.of<Models>(context,
                                                   listen: false)
                                               .radioButton(value!);
-                                          Provider.of<Models>(context,
-                                                  listen: false)
-                                              .suggestBody();
+
                                           Provider.of<Models>(context,
                                                   listen: false)
                                               .waterflow();
@@ -115,9 +113,7 @@ class _SettingsState extends State<Settings> {
                                           Provider.of<Models>(context,
                                                   listen: false)
                                               .radioButton(value!);
-                                          Provider.of<Models>(context,
-                                                  listen: false)
-                                              .suggestBody();
+
                                           Provider.of<Models>(context,
                                                   listen: false)
                                               .waterflow();
@@ -173,9 +169,7 @@ class _SettingsState extends State<Settings> {
                                       Provider.of<Models>(context,
                                               listen: false)
                                           .ageSlider(value.floor());
-                                      Provider.of<Models>(context,
-                                              listen: false)
-                                          .suggestBody();
+
                                       Provider.of<Models>(context,
                                               listen: false)
                                           .waterflow();

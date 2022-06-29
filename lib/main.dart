@@ -37,7 +37,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     tz.initializeTimeZones();
-    Provider.of<Models>(context, listen: false).loadData();
     NotificationService().showNotification(
       0,
       "Drinkify",

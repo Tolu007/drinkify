@@ -47,6 +47,7 @@ class _homebodyState extends State<homebody> {
   void initState() {
     super.initState();
     hiveBox = Hive.box<HiveModel>(hiveBoxName);
+    Provider.of<Models>(context, listen: false).loadData();
   }
 
   @override
