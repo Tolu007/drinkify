@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
       08,
     );
     NotificationService().showNotification(
-      0,
+      1,
       "Drinkify",
       "Time to hydrate!",
       time.year,
@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
       10,
     );
     NotificationService().showNotification(
-      0,
+      2,
       "Drinkify",
       "Time to hydrate!",
       time.year,
@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
       12,
     );
     NotificationService().showNotification(
-      0,
+      3,
       "Drinkify",
       "Time to hydrate!",
       time.year,
@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
       14,
     );
     NotificationService().showNotification(
-      0,
+      4,
       "Drinkify",
       "Time to hydrate!",
       time.year,
@@ -83,7 +83,7 @@ class _MyAppState extends State<MyApp> {
       16,
     );
     NotificationService().showNotification(
-      0,
+      5,
       "Drinkify",
       "Time to hydrate!",
       time.year,
@@ -92,7 +92,7 @@ class _MyAppState extends State<MyApp> {
       18,
     );
     NotificationService().showNotification(
-      0,
+      6,
       "Drinkify",
       "Time to hydrate!",
       time.year,
@@ -101,7 +101,7 @@ class _MyAppState extends State<MyApp> {
       20,
     );
     NotificationService().showNotification(
-      0,
+      7,
       "Drinkify",
       "Time to hydrate!",
       time.year,
@@ -110,7 +110,7 @@ class _MyAppState extends State<MyApp> {
       22,
     );
     NotificationService().showNotification(
-      0,
+      8,
       "Drinkify",
       "Time to hydrate!",
       time.year,
